@@ -20,6 +20,7 @@ variable "ec2" {
   }
 
 }
+
 resource "aws_instance" "Sample" {
   for_each                    = var.ec2
   ami                         = "ami-0138ef89268eafec8"
