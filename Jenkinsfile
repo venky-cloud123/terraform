@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    environment {
-        AWS_DEFAULT_REGION = 'your-aws-region'
-    }
+    
     stages {
         stage('Checkout Code') {
             steps {
