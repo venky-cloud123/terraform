@@ -20,7 +20,7 @@ pipeline {
 
                     sh '''
                     mkdir -p keypair
-                    cp $PEM_FILE keypair/demo.pem
+                    cp "$PEM_FILE" keypair/demo.pem
                     chmod 400 keypair/demo.pem
 
                     terraform plan -out=tfplan
