@@ -16,18 +16,19 @@ pipeline {
         }
         stage('Terraform Plan') {
             steps {
-                script {
-                    sh 'terraform plan -out=tfplan'
+                withCredentials([file(credentialsId: 'demo-pem', variable: 'PEM_FILE')]) {
+
+                    sh '''
+                    mkdir -p keypair
+                    cp $PEM_FILE keypair/demo.pem
+                    chmod 400 keypair/demo.pem
+
+                    terraform plan -out=tfplan
+                    '''
                 }
             }
         }
-        stage('Terraform Apply') {
-            steps {
-                script {
-                    sh 'terraform apply -auto-approve tfplan'
-                }
-            }
-        }
+        
     }
     post {
         always {
